@@ -1,0 +1,77 @@
+
+.button1 {
+ 
+  display: inline-block;
+  border: none;
+  text-align: center;
+  transition: all 0.5s;
+  padding: 14px 20px;
+  margin: 10px 10px  ;
+  border: none;
+  cursor: pointer;  
+  font-weight: bold;
+}
+.button1#login_button1,.button1#login_button2{
+    border-radius: 4px;
+  background-color: rgb(42, 31, 51);
+  color: #FFFFFF;
+  color: white;
+   height: 36px;
+  width: 80px;
+}
+.button1 span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button1 span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button1:hover span {
+  padding-right: 25px;
+}
+
+.button1:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+input[type=text].login, input[type=password].login,select {
+    width: 220px;
+    padding: 5px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #ededed;
+}
+input[type=number].register,input[type=Email].register, select 
+    {
+      width: 350px;
+      padding: 12px 20px;
+      margin: 8px 50px;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-sizing: border-box-shadow;
+    }
+ 
+button.button1#register_button1,button.button1#register_button2{
+       
+  background-color: #007acc;
+  color: white;
+  padding: 14px 20px;
+  margin: 10px 50px;
+  border: none;
+  border-radius: 4px;
+  width: 150px;
+
+}
+ 

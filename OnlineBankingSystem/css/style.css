@@ -299,3 +299,77 @@ header {
 	margin-bottom: 13px;
 	font-size: 14px;
 }
+
+//Modifed for Login
+
+
+
+ #middle_box {
+ 	background-color: black;
+  width: 100%
+  padding:0;
+  margin-top: 0;
+
+}
+
+.row_login{
+  float: left;
+  width: 20%;
+  margin-left: 50px; 
+  margin-top: 20px;
+  padding: 10px;
+
+}
+.mid_login{
+  padding-left: 50px; 
+  width: 200px;
+  float: left;
+}
+
+.row#login_img{
+  margin-right: 0;
+
+}
+label{
+  font:16px Georgia ;
+  color: black;
+}
+#login_span{
+  
+  font: 30px Georgia;
+  color: black;
+}
+.span_login{
+  float: left;
+
+}
+.item#login_image{
+  margin-top: 0;
+  float: right;
+  width: 50%;
+   
+}
+#login_page_img{
+  width: 634px;
+  float: right;
+  height: 326px;
+   
+}
+a.extra{
+  font:16px Georgia ;
+  color: black;
+}
+a.extra:hover{
+	color: darkblue;
+ }
+ a.extra:active{
+ 	color: lightblue;
+ }
+
+ 
+
+.row_register{
+	margin-left: 30px;
+	width: 50%
+}
+
