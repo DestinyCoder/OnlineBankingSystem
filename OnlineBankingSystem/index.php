@@ -59,10 +59,10 @@
 							<li data-target="#carousel-banner" data-slide-to="3"></li>
 						</ol>
 						<div class="carousel-inner" role="listbox">
-							<div class="item active"><img src="images/img_1.jpg"></div>
-							<div class="item"><img src="images/img_2.jpg"></div>
-							<div class="item"><img src="images/img_3.jpg"></div>
-							<div class="item"><img src="images/img_4.jpg"></div>
+							<div class="item active" style="height: 280px;"><img src="images/img1.png"></div>
+							<div class="item" style="height: 280px;"><img src="images/img2.jpg"></div>
+							<div class="item" style="height: 280px;"><img src="images/img3.jpg"></div>
+							<div class="item" style="height: 280px;"><img src="images/img4.jpg"></div>
 						</div>
 					</div>
 				</div>
