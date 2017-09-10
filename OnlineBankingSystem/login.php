@@ -53,7 +53,7 @@
 				<div class="row_login">
 				<center><h2 id="login_span">Login</h2></center>
 				
-					<form action="" style="margin-top: 20px;">
+					<form action="process.php" style="margin-top: 20px;" method="POST" >
 						<label>Username:</label><br>
  						<input type="text" class="login" name="username" required ><br>
   						<label>Password:</label><br>
@@ -63,7 +63,7 @@
 					</form>
 				</div> 
 				<div class="mid_login">
-					<br><br><br><br><br>
+					<br><br><br><br><br><br><br>
 					<a class="extra" href="">Forgot Password</a><br><br><br>
 					<a class="extra" href="">Forgot Username</a><br><br><br>
 					<a class="extra" href="apply.php">New User?/Register</a><br><br>
