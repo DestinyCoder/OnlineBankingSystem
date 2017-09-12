@@ -1,3 +1,26 @@
+<?php
+session_start();
+require_once 'class.user.php';
+$user_login = new USER();
+
+if($user_login->is_logged_in()!="")
+{
+ $user_login->redirect('customer.php');
+}
+
+if(isset($_POST['submit']))
+{
+ $account = trim($_POST['account']);
+ $cpass = trim($_POST['password']);
+ 
+ if($user_login->login($account,$cpass))
+ {
+  $user_login->redirect('customer.php');
+ }
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,17 +77,18 @@
 				<center><h2 id="login_span">Login</h2></center>
 				
 					<form action="process.php" style="margin-top: 20px;" method="POST" >
-						<label>Username:</label><br>
- 						<input type="text" class="login" name="username" required ><br>
+						<label>Account No.</label><br>
+ 						<input type="number" class="login" name="account" required ><br>
   						<label>Password:</label><br>
   						<input type="Password" class="login" name="password" required ><br><br>
- 						<button class="button1" id="login_button1" type="submit"><span>Login</span></button>
+ 						<button class="button1" id="login_button1" type="submit" name="submit"><span>Login</span></button>
  				 		<button class="button1" id="login_button2" type="reset"><span>Reset</span></button>
 					</form>
 				</div> 
 				<div class="mid_login">
 					<br><br><br><br><br><br><br>
-					<a class="extra" href="forgetpass.php">Forgot Password</a><br><br><br>
+					<a class="extra" href="">Forgot Password</a><br><br><br>
+					<a class="extra" href="">Forgot Username</a><br><br><br>
 					<a class="extra" href="apply.php">New User?/Register</a><br><br>
 				</div>
 				 
