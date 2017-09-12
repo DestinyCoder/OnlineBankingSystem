@@ -64,8 +64,7 @@
 				</div> 
 				<div class="mid_login">
 					<br><br><br><br><br><br><br>
-					<a class="extra" href="">Forgot Password</a><br><br><br>
-					<a class="extra" href="">Forgot Username</a><br><br><br>
+					<a class="extra" href="forgetpass.php">Forgot Password</a><br><br><br>
 					<a class="extra" href="apply.php">New User?/Register</a><br><br>
 				</div>
 				 

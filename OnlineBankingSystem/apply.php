@@ -1,3 +1,60 @@
+<?php
+session_start();
+require_once 'class.user.php';
+
+$reg_user = new USER();
+
+if($reg_user->is_logged_in()!="")
+{
+ $reg_user->redirect('customer.php');
+}
+
+
+if(isset($_POST['submit']))
+{
+ $cname = trim($_POST['cname']);
+ $gen = trim($_POST['radio']);
+ $locat = trim($_POST['location']);
+ $bcode = trim($_POST['bcode']);
+ $cemail = trim($_POST['email']);
+ $cmobile = trim($_POST['mobile']);
+ 
+ $stmt = $reg_user->runQuery("SELECT * FROM customer WHERE customerEmail=:email_id");
+ $stmt->execute(array(":email_id"=>$cemail));
+ $row = $stmt->fetch(PDO::FETCH_ASSOC);
+ 
+ if($stmt->rowCount() > 0)
+ {
+  $msg = "
+        <div class='alert alert-error'>
+    <button class='close' data-dismiss='alert'>&times;</button>
+     <strong>Sorry !</strong>  email allready exists , Please Try another one
+     </div>
+     ";
+ }
+ else
+ {
+ 	$account = $reg_user->getAccountNumber();
+
+  if($reg_user->apply($cname,$gen,$locat,$bcode,$cemail,$cmobile,$account))
+  {   
+ 	$account = '';
+   $msg = "
+     <div class='alert alert-success'>
+      <button class='close' data-dismiss='alert'>&times;</button>
+      <strong>Success!</strong>  Your Application is successfull.
+                    Please visit your nearest branch to cinfirm your account. 
+       </div>
+     ";
+  }
+  else
+  {
+   echo "sorry , Application is Unsuccessfull, Try once again";
+  }  
+ }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,25 +106,40 @@
 				</nav>
 			</div>
 		</div>
- 		<div class="features_area row" >	
-			<div class="row_register" >
-				<h1><center>Register</center></h1>
-				<form  name = "myForm" class="register_form" onsubmit=" " method="post">
+ 		<div class="features_area row">	
+			<div class="row_register">
+				<?php if(isset($msg)) echo $msg;  ?>
+				<h1><center>Apply For Bank Account</center></h1>
+				<form  name = "myForm" class="register_form" action="" method="post">
 				<table> 
 					<tr>
-						<td><label><b>Acount No</b></label>
+						<td><label><b>Name</b></label>
 						</td><td>:-</td>
-						<td><input class="register" type="number" placeholder="Enter Account No." name="account" required> <br><br></td>
+						<td><input class="register" type="text" placeholder="Enter Your Name Here" name="cname" required> <br><br></td>
 					</tr>
 					<tr>
-		 				<td><label><b>CIF No</b></label></td>
-		 				<td>:-</td>
-						<td><input class="register" type="number" placeholder="Enter CIF No." name="cif" required> <br><br></td>
-					</tr>
+						<td><label><b>Gender</b></label>
+						</td><td>:-</td>
+						<td> 
+							<input type="radio" name="radio" value="Male">Male&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="radio" value="Female">Female&nbsp;&nbsp;&nbsp;
+                        </td>
+                    </tr>
+					<tr>
+                        <td><label><b>Location</b></label></td>
+                        </td><td>:-</td>
+                        <td>
+                            <select name="location">
+                                <option value="Geneva">Geneva</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="New Delhi">New Delhi</option>  
+                            </select>
+                        </td>
+                    </tr>
 					<tr> 
 						<td><label><b>Branch code</b></label></td>
 						<td>:-</td>
-						<td><input class="register" type="number" placeholder="Enter Branch code" name="account" required></center><br><br></td>
+						<td><input class="register" type="text" placeholder="Enter Branch code" name="bcode" required></center><br><br></td>
 					</tr>
 					<tr>
 						<td> <label><b>Email</b></label></td>
@@ -77,7 +149,7 @@
 					<tr> 
 						<td><label><b>Registered mobile No</b></label></td>
 						<td>:-</td>
-						<td><input class="register" type="number" placeholder="Enter mobile no" name="mobile" max ="10" required> <br><br></td>
+						<td><input class="register" type="number" placeholder="Enter mobile no" name="mobile" required> <br><br></td>
 					</tr>
     			   </table>
     			   <div class="button_register">
@@ -92,4 +164,4 @@
 	</div>
 	<script type="text/javascript" src=""></script>
 </body>
-</html>
+</html>                                                       
