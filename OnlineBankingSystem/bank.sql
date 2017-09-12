@@ -32,7 +32,7 @@ USE `bank`;
 
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
-  `account_no` int(11) NOT NULL,
+  `customerAccount` int(11) NOT NULL,
   `balance` int(11) NOT NULL,
   `loan_status` varchar(11) NOT NULL,
   `date_create` date NOT NULL
@@ -42,27 +42,10 @@ CREATE TABLE `account` (
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`account_no`, `balance`, `loan_status`, `date_create`) VALUES
+INSERT INTO `account` (`customerAccount`, `balance`, `loan_status`, `date_create`) VALUES
 (123, 9000, 'no', '2017-08-08'),
 (321, 0, 'yes', '2017-08-15');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `applied_cust`
---
-
-DROP TABLE IF EXISTS `applied_cust`;
-CREATE TABLE `applied_cust` (
-  `customer_id` int(11) NOT NULL,
-  `cust_name` text NOT NULL,
-  `cust_phone` int(11) NOT NULL,
-  `cust_email` varchar(100) NOT NULL,
-  `cust_address` varchar(200) NOT NULL,
-  `cust_branch` varchar(100) NOT NULL,
-  `cust_dob` date NOT NULL,
-  `cust_age` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -72,7 +55,7 @@ CREATE TABLE `applied_cust` (
 
 DROP TABLE IF EXISTS `branch`;
 CREATE TABLE `branch` (
-  `branch_id` int(11) NOT NULL,
+  `branchCode` enum('GEN123','DEL456','MUM789') NOT NULL DEFAULT 'GEN123',
   `branch_city` varchar(100) NOT NULL,
   `branch_phone` int(11) NOT NULL,
   `branch_address` varchar(255) NOT NULL
@@ -82,38 +65,43 @@ CREATE TABLE `branch` (
 -- Dumping data for table `branch`
 --
 
-INSERT INTO `branch` (`branch_id`, `branch_city`, `branch_phone`, `branch_address`) VALUES
-(12, 'nerul', 2225454, 'nerul');
+INSERT INTO `branch` (`branchCode`, `branch_city`, `branch_phone`, `branch_address`) VALUES
+(GEN123, 'GENEVA', 2225454, 'GENEVA');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `customer`
 --
-
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
-  `cust_id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `account_no` int(11) NOT NULL,
-  `phone` int(11) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `gender` text NOT NULL,
-  `address` varchar(200) NOT NULL,
-  `branch_code` int(11) NOT NULL,
-  `dob` date NOT NULL,
-  `age` int(11) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `customerID` int(11) NOT NULL,
+  `customerAccount` int(16) NOT NULL,
+  `gender` enum('Male','Female') NOT NULL,
+  `location` enum('GENEVA','DELHI','MUMBAI') NOT NULL DEFAULT 'GENEVA',
+  `branchCode` enum('GEN123','DEL456','MUM789') NOT NULL DEFAULT 'GEN123',
+  `accountStatus` enum('Y','N') NOT NULL DEFAULT 'N',
+  `customerName` varchar(100) NOT NULL,
+  `customerEmail` varchar(100) NOT NULL,
+  `customerPass` varchar(100) DEFAULT NULL,
+  `Customerstatus` enum('Y','N') NOT NULL DEFAULT 'N',
+  `tokenCode` varchar(100) NOT NULL,
+  `mobile` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`cust_id`, `name`, `account_no`, `phone`, `email`, `gender`, `address`, `branch_code`, `dob`, `age`, `username`, `password`) VALUES
-(1, 'Pawan Yadav', 123, 845210124, 'pawan@gmail.com', 'male', 'Nerul', 12, '1997-07-11', 20, 'pawan11', '123\r\n'),
-(2, 'jitendra', 321, 845201974, 'jitu@gmail.com', 'male', 'dombivali', 12, '1998-05-13', 19, 'jitu12', '321');
+INSERT INTO `customer` (`customerID`, `customerAccount`, `gender`, `location`, `branchCode`, `accountStatus`, `customerName`, `customerEmail`, `customerPass`, `Customerstatus`, `tokenCode`, `mobile`) VALUES
+(1, 2147483647, 'Male', 'GENEVA', 'GEN123', 'N', 'jitendra', 'rajpurohitjitendra83@gmail.com', NULL, 'N', '', 2147483647),
+(7, 58652, 'Male', 'GENEVA', 'GEN123', 'N', 'pawan', 'pawan@gmail.com', NULL, 'N', '', 2147483647),
+(8, 47315, 'Male', 'GENEVA', 'GEN123', 'N', 'niraj', 'niraj@gmail.com', NULL, 'N', '', 2147483647),
+(9, 31101, 'Male', 'GENEVA', 'GEN123', 'N', 'varun', 'varun@gmail.com', '967dc57cdd4751d24de6366b9301d8c3', 'N', 'e0c661f341e6cfdc1733a9df0a21b703', 54758778),
+(10, 72077, 'Male', 'MUMBAI', 'MUM789', 'N', 'fgfg', 'rajpurohitjiten@gmail.com', NULL, 'N', '', 2147483647);
+
 
 -- --------------------------------------------------------
 
