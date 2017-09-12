@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<?php include 'getdetails.php';?>
+<?php include 'inc/getdetails.php';?>
 <head>
 	<title>The World Bank</title>
 	<meta charset="utf-8">
@@ -83,7 +83,7 @@
 				</tr>
 				<tr>
 					<td>Account No</td>
-					<td><?php echo $row_acc["acc_no"] ?></td>
+					<td><?php echo $row_acc["account_no"] ?></td>
 				</tr>
 				<tr>
 					<td>Customer Id</td>

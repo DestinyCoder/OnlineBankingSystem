@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<?php include 'get_trans_dt.php';?>
+<?php include 'inc/get_trans_dt.php';?>
 <head>
 	<title>The World Bank</title>
 	<meta charset="utf-8">
@@ -58,7 +58,7 @@
 				
 				<table class="show_trans" style="width: 100%"> 
 				<tr>
-					<th>Date</th>
+					<th style="width: 100%" >Date</th>
 					<th>Narration</th>
 					<th>Account_No</th>
 					<th>Name</th>
@@ -68,26 +68,26 @@
 				<?php 
 					foreach($row_trans as $row){
 					echo "<tr>";
-					echo "<td>" . $row['date'] . "</td>";
+					echo "<td>" . $row['trans_date'] . "</td>";
 					if($row_cust["account_no"] == $row['sender']){
-					$sql=$conn->prepare("SELECT name FROM customer WHERE customer_id = (SELECT customer_id FROM account WHERE account_no= '".$reciver."')");
+					$sql=$conn->prepare("SELECT name FROM customer WHERE account_no= '".$row['receiver']."'");
 					$sql->execute();
-					$name=$sql->setFetchMode(PDO::FETCH_ASSOC);
-					echo "<td>Transfer to ".$name."</td>";
-					echo "<td>" . $row['reciver'] . "</td>";
-					echo "<td>" . $name . "</td>";
+					$name=$sql->fetch();
+					echo "<td>Transfer to ".$name['name']."</td>";
+					echo "<td>" . $row['receiver'] . "</td>";
+					echo "<td>" . $name['name'] . "</td>";
 					echo "<td>Debited</td>";
 					}
-					else if ($row_cust["account_no"] == $row['reciver']){
-					$sql=$conn->prepare("SELECT name FROM customer WHERE customer_id = (SELECT customer_id FROM account WHERE account_no= '".$sender."')");
+					else if ($row_cust["account_no"] == $row['receiver']){
+					$sql=$conn->prepare("SELECT name FROM customer WHERE account_no= '".$row['sender']."'");
 					$sql->execute();
-					$name=$sql->setFetchMode(PDO::FETCH_ASSOC);
-					echo "<td>Transfer From ".$name."</td>";
+					$name=$sql->fetch();
+					echo "<td>Transfer From ".$name['name']."</td>";
 					echo "<td>" . $row['sender'] . "</td>";
-					echo "<td>" .  $name . "</td>";
+					echo "<td>" .  $name['name'] . "</td>";
 					echo "<td>Credited</td>";
 					}
-					echo "<td>" . $row['amount'] . "</td>";
+					echo "<td>" . $row['trans_amount'] . "</td>";
 					echo "</tr>";
 					}
 				?>	

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2017 at 12:46 PM
+-- Generation Time: Sep 12, 2017 at 02:36 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `bank`
 --
+CREATE DATABASE IF NOT EXISTS `bank` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `bank`;
 
 -- --------------------------------------------------------
 
@@ -32,9 +34,17 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `account_no` int(11) NOT NULL,
   `balance` int(11) NOT NULL,
-  `loan_no` int(11) NOT NULL,
+  `loan_status` varchar(11) NOT NULL,
   `date_create` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `account`
+--
+
+INSERT INTO `account` (`account_no`, `balance`, `loan_status`, `date_create`) VALUES
+(123, 9000, 'no', '2017-08-08'),
+(321, 0, 'yes', '2017-08-15');
 
 -- --------------------------------------------------------
 
@@ -68,6 +78,13 @@ CREATE TABLE `branch` (
   `branch_address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `branch`
+--
+
+INSERT INTO `branch` (`branch_id`, `branch_city`, `branch_phone`, `branch_address`) VALUES
+(12, 'nerul', 2225454, 'nerul');
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +98,7 @@ CREATE TABLE `customer` (
   `account_no` int(11) NOT NULL,
   `phone` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `gender` text NOT NULL,
   `address` varchar(200) NOT NULL,
   `branch_code` int(11) NOT NULL,
   `dob` date NOT NULL,
@@ -88,6 +106,14 @@ CREATE TABLE `customer` (
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`cust_id`, `name`, `account_no`, `phone`, `email`, `gender`, `address`, `branch_code`, `dob`, `age`, `username`, `password`) VALUES
+(1, 'Pawan Yadav', 123, 845210124, 'pawan@gmail.com', 'male', 'Nerul', 12, '1997-07-11', 20, 'pawan11', '123\r\n'),
+(2, 'jitendra', 321, 845201974, 'jitu@gmail.com', 'male', 'dombivali', 12, '1998-05-13', 19, 'jitu12', '321');
 
 -- --------------------------------------------------------
 
@@ -130,10 +156,18 @@ DROP TABLE IF EXISTS `transaction`;
 CREATE TABLE `transaction` (
   `trans_id` int(11) NOT NULL,
   `sender` int(11) NOT NULL,
-  `reciever` int(11) NOT NULL,
+  `receiver` int(11) NOT NULL,
   `trans_amount` int(11) NOT NULL,
   `trans_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`trans_id`, `sender`, `receiver`, `trans_amount`, `trans_date`) VALUES
+(1, 123, 321, 500, '2017-09-01'),
+(2, 321, 123, 100, '2017-09-04');
 
 --
 -- Indexes for dumped tables
@@ -144,7 +178,7 @@ CREATE TABLE `transaction` (
 --
 ALTER TABLE `account`
   ADD PRIMARY KEY (`account_no`),
-  ADD UNIQUE KEY `loan_no` (`loan_no`);
+  ADD UNIQUE KEY `loan_no` (`loan_status`);
 
 --
 -- Indexes for table `applied_cust`
@@ -187,7 +221,21 @@ ALTER TABLE `loan_info`
 --
 ALTER TABLE `transaction`
   ADD PRIMARY KEY (`trans_id`);
-COMMIT;
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `transaction`
+--
+ALTER TABLE `transaction`
+  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
