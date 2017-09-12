@@ -373,3 +373,26 @@ a.extra:hover{
 	width: 50%
 }
 
+table.show_detail td{
+	text-align: left;
+	padding: 15px;
+	font-size: 30px;
+	font-family: "Times New Roman";
+	border-top: 1px solid #ddd;
+	
+}
+.show_detail_head{
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	color: black;
+
+}
+table.show_trans td,th{
+	text-align: left;
+	padding: 15px;
+	font-size: 30px;
+	font-family: "Times New Roman";
+	border-top: 1px solid #ddd;
+	
+}

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<?php include 'getdetails.php';?>
+<?php include 'get_trans_dt.php';?>
 <head>
 	<title>The World Bank</title>
 	<meta charset="utf-8">
@@ -53,42 +53,45 @@
 		</div>
  		<div class="features_area row" >	
 		<center>
-				<label class="show_detail_head">Personal Details</label><br><br>
+				<label class="show_detail_head">Last transaction details</label><br><br>
 				<div class="row_register" style="width: 80%; border: 1px solid #ddd;" >
 				
-				<table class="show_detail" style="width: 100%"> 
+				<table class="show_trans" style="width: 100%"> 
 				<tr>
-					<td>Name</td>
-					<td><?php echo $row_cust["name"] ?></td>
+					<th>Date</th>
+					<th>Narration</th>
+					<th>Account_No</th>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Amount</th>					
 				</tr>
-				<tr>
-					<td>Phone No.</td>
-					<td><?php echo $row_cust["phone"] ?></td>
-				</tr>
-				<tr>
-					<td>E-mail</td>
-					<td><?php echo $row_cust["email"] ?></td>
-				</tr>
-				<tr>
-					<td>Date of Birth</td>
-					<td><?php echo $row_cust["dob"] ?></td>
-				</tr>
-				<tr>
-					<td>Gender</td>
-					<td><?php echo $row_cust["gender"] ?></td>
-				</tr> 
-				<tr>
-					<td>Address</td>
-					<td><?php echo $row_cust["address"] ?></td>
-				</tr>
-				<tr>
-					<td>Account No</td>
-					<td><?php echo $row_acc["acc_no"] ?></td>
-				</tr>
-				<tr>
-					<td>Customer Id</td>
-					<td><?php echo $row_cust["cust_id"] ?></td>
-				</tr>
+				<?php 
+					foreach($row_trans as $row){
+					echo "<tr>";
+					echo "<td>" . $row['date'] . "</td>";
+					if($row_cust["account_no"] == $row['sender']){
+					$sql=$conn->prepare("SELECT name FROM customer WHERE customer_id = (SELECT customer_id FROM account WHERE account_no= '".$reciver."')");
+					$sql->execute();
+					$name=$sql->setFetchMode(PDO::FETCH_ASSOC);
+					echo "<td>Transfer to ".$name."</td>";
+					echo "<td>" . $row['reciver'] . "</td>";
+					echo "<td>" . $name . "</td>";
+					echo "<td>Debited</td>";
+					}
+					else if ($row_cust["account_no"] == $row['reciver']){
+					$sql=$conn->prepare("SELECT name FROM customer WHERE customer_id = (SELECT customer_id FROM account WHERE account_no= '".$sender."')");
+					$sql->execute();
+					$name=$sql->setFetchMode(PDO::FETCH_ASSOC);
+					echo "<td>Transfer From ".$name."</td>";
+					echo "<td>" . $row['sender'] . "</td>";
+					echo "<td>" .  $name . "</td>";
+					echo "<td>Credited</td>";
+					}
+					echo "<td>" . $row['amount'] . "</td>";
+					echo "</tr>";
+					}
+				?>	
+				
 			</table>
 			</div></center>	 
 		</div>
