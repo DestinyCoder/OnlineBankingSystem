@@ -78,8 +78,8 @@ class USER
  {
   try
   {
-   $stmt = $this->conn->prepare("SELECT * FROM customer WHERE customerEmail=:email_id");
-   $stmt->execute(array(":email_id"=>$email));
+   $stmt = $this->conn->prepare("SELECT * FROM customer WHERE customerAccount=:account");
+   $stmt->execute(array(":account"=>$account));
    $customerRow=$stmt->fetch(PDO::FETCH_ASSOC);
    
    if($stmt->rowCount() == 1)
@@ -93,7 +93,7 @@ class USER
      }
      else
      {
-      header("Location: login.php?error");
+      header("Location: login.php?error1");
       exit;
      }
     }
@@ -105,7 +105,7 @@ class USER
    }
    else
    {
-    header("Location: login.php?error");
+    header("Location: login.php?error2");
     exit;
    }  
   }

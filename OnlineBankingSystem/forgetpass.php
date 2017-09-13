@@ -17,7 +17,7 @@ if(isset($_POST['submit']))
  $row = $stmt->fetch(PDO::FETCH_ASSOC); 
  if($stmt->rowCount() == 1)
  {
-  $id = base64_encode($row['custmerID']);
+  $id = base64_encode($row['customerID']);
   $code = md5(uniqid(rand()));
   
   $stmt = $user->runQuery("UPDATE customer SET tokenCode=:token WHERE customerEmail=:email");
