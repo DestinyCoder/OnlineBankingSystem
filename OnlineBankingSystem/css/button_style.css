@@ -43,7 +43,7 @@
   opacity: 1;
   right: 0;
 }
-input[type=text].login, input[type=password].login,select {
+input[type=text].login, input[type=password].login, input[type=number].login,select {
     width: 220px;
     padding: 5px;
     margin: 8px 0;
@@ -52,8 +52,7 @@ input[type=text].login, input[type=password].login,select {
     box-sizing: border-box;
     background-color: #ededed;
 }
-input[type=number].register,input[type=Email].register, select 
-    {
+input[type=number].register,input[type=Email].register,input[type=text].register ,select {
       width: 350px;
       padding: 12px 20px;
       margin: 8px 50px;
