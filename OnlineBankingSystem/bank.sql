@@ -84,7 +84,7 @@ CREATE TABLE `customer` (
   `customerName` varchar(100) NOT NULL,
   `customerEmail` varchar(100) NOT NULL,
   `customerPass` varchar(100) DEFAULT NULL,
-  `Customerstatus` enum('Y','N') NOT NULL DEFAULT 'N',
+  `customerStatus` enum('Y','N') NOT NULL DEFAULT 'N',
   `tokenCode` varchar(100) NOT NULL,
   `mobile` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
