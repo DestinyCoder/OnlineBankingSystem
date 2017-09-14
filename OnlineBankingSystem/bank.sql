@@ -66,7 +66,7 @@ CREATE TABLE `branch` (
 --
 
 INSERT INTO `branch` (`branchCode`, `branch_city`, `branch_phone`, `branch_address`) VALUES
-(GEN123, 'GENEVA', 2225454, 'GENEVA');
+('GEN123', 'GENEVA', 2225454, 'GENEVA');
 
 -- --------------------------------------------------------
 
@@ -165,32 +165,14 @@ INSERT INTO `transaction` (`trans_id`, `sender`, `receiver`, `trans_amount`, `tr
 -- Indexes for table `account`
 --
 ALTER TABLE `account`
-  ADD PRIMARY KEY (`account_no`),
+  ADD PRIMARY KEY (`customerAccount`),
   ADD UNIQUE KEY `loan_no` (`loan_status`);
-
---
--- Indexes for table `applied_cust`
---
-ALTER TABLE `applied_cust`
-  ADD PRIMARY KEY (`customer_id`),
-  ADD UNIQUE KEY `cust_email` (`cust_email`),
-  ADD UNIQUE KEY `cust_phone` (`cust_phone`);
 
 --
 -- Indexes for table `branch`
 --
 ALTER TABLE `branch`
   ADD PRIMARY KEY (`branch_id`);
-
---
--- Indexes for table `customer`
---
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`account_no`),
-  ADD UNIQUE KEY `cust_id` (`cust_id`),
-  ADD UNIQUE KEY `phone` (`phone`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `loan`
@@ -210,15 +192,7 @@ ALTER TABLE `loan_info`
 ALTER TABLE `transaction`
   ADD PRIMARY KEY (`trans_id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
 
---
--- AUTO_INCREMENT for table `customer`
---
-ALTER TABLE `customer`
-  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `transaction`
 --
