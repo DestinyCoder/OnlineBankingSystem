@@ -1,5 +1,5 @@
 <?php
- include 'connection.php';
+ include '../dbconnect.php';
  include 'getdetails.php';
  // getting all transaction details of the account 
  $trans_result = $conn->prepare("SELECT * FROM transaction WHERE sender = '".$row_cust["account_no"]."'  														 										 OR receiver = '".$row_cust["account_no"]."'" );

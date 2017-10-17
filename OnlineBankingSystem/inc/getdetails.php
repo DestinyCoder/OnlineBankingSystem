@@ -1,5 +1,5 @@
 <?php
- include 'connection.php';
+ include '../dbconnect.php';
 
  //necesarry include to get username
  // getting customer details  
