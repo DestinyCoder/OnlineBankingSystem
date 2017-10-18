@@ -1,5 +1,4 @@
 <?php
-
 require_once 'dbconnect.php';
 
 class USER
@@ -137,21 +136,45 @@ class USER
  
  function send_mail($email,$message,$subject)
  {      
-  require_once('mailer/class.phpmailer.php');
-  $mail = new PHPMailer();
-  $mail->IsSMTP(); 
-  $mail->SMTPDebug  = 0;                     
-  $mail->SMTPAuth   = true;                  
-  $mail->SMTPSecure = "ssl";                 
-  $mail->Host       = "smtp.gmail.com";      
-  $mail->Port       = 465;             
-  $mail->AddAddress($email);
-  $mail->Username="rajpurohitjitendra81@gmail.com";  
-  $mail->Password="gmailpassword";            
-  $mail->From='rajpurohitjitendra81@gmail.com';
-  $mail->AddReplyTo("rajpurohitjitendra81@gmail.com","Jitendra Rajpurohit");
-  $mail->Subject    = $subject;
-  $mail->MsgHTML($message);
-  $mail->Send();
+require 'PHPMailer/PHPMailerAutoload.php';
+
+$mail = new PHPMailer();
+  
+  //Enable SMTP debugging.
+  $mail->SMTPDebug = 1;
+  //Set PHPMailer to use SMTP.
+  $mail->isSMTP();
+  //Set SMTP host name
+  $mail->Host = "smtp.gmail.com";
+  //Set this to true if SMTP host requires authentication to send email
+  $mail->SMTPAuth = TRUE;
+  //Provide username and password
+  $mail->Username = "gamers1107@gmail.com";
+  $mail->Password = "pawan11071997";
+  //If SMTP requires TLS encryption then set it
+  $mail->SMTPSecure = "false";
+  $mail->Port = 587;
+  //Set TCP port to connect to
+  
+  $mail->From = "gamers1107@gmail.com";
+  $mail->FromName = "World Bank";
+  
+  $mail->addAddress($email);
+  
+  $mail->isHTML(true);
+ 
+  $mail->Subject = $subject;
+  $mail->Body = $message;
+  $mail->AltBody = $message;
+
+  if(!$mail->send())
+  { 
+    ob_end_clean();
+   echo "Mailer Error: " . $mail->ErrorInfo;
+  }
+  else
+  {
+    ob_end_clean();
+  }
  } 
 }
