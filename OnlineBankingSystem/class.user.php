@@ -149,14 +149,14 @@ $mail = new PHPMailer();
   //Set this to true if SMTP host requires authentication to send email
   $mail->SMTPAuth = TRUE;
   //Provide username and password
-  $mail->Username = "gamers1107@gmail.com";
-  $mail->Password = "pawan11071997";
+  $mail->Username = "worldofbank@gmail.com";
+  $mail->Password = "world@123";
   //If SMTP requires TLS encryption then set it
   $mail->SMTPSecure = "false";
   $mail->Port = 587;
   //Set TCP port to connect to
   
-  $mail->From = "gamers1107@gmail.com";
+  $mail->From = "worldofbank@gmail.com";
   $mail->FromName = "World Bank";
   
   $mail->addAddress($email);
