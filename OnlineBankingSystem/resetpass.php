@@ -32,8 +32,9 @@ if(isset($_GET['id']) && isset($_GET['code']))
    }
    else
    {
-    $stmt = $user->runQuery("UPDATE customers SET customerPass=:pass WHERE customerID=:cid");
-    $stmt->execute(array(":pass"=>$cpass,":cid"=>$rows['customerID']));
+   	$password = md5($cpass);
+    $stmt = $user->runQuery("UPDATE customer SET customerPass=:pass WHERE customerID=:cid");
+    $stmt->execute(array(":pass"=>$password,":cid"=>$rows['customerID']));
     
     $msg = "<div class='alert alert-success'>
       <button class='close' data-dismiss='alert'>&times;</button>

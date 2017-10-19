@@ -2,9 +2,9 @@
 class Database {
     
     private $host = "localhost";
-    private $db_name = "bank";
+    private $db_name = "world_bank_db";
     private $username = "root";
-    private $password = "";
+    private $password = "jitendra";
     public $conn;
      
     public function dbConnection() {

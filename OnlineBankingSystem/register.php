@@ -35,17 +35,16 @@ if(isset($_POST['submit']))
  {
   if($reg_user->register($account,$bcode,$cemail,$pass,$code))
   {   
-   $id = $reg_user->lasdID();  
-   $key = base64_encode($id);
-   $id = $key;
+    $id = base64_encode($row['customerID']);
+ 
    
    $message = "     
       Hello $cemail,
       <br /><br />
-      Welcome to Coding Cage!<br/>
+      Welcome to World Bank!<br/>
       To complete your registration  please , just click following link<br/>
       <br /><br />
-      <a href='localhost/verify.php?id=$id&code=$code'>Click HERE to Activate :)</a>
+      <a href='localhost/OnlineBankingSystem/verify.php?id=$id&code=$code'>Click HERE to Activate :)</a>
       <br /><br />
       Thanks,";
       
