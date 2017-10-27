@@ -18,6 +18,7 @@ if(isset($_POST['submit']))
  $bcode = trim($_POST['bcode']);
  $cemail = trim($_POST['email']);
  $cmobile = trim($_POST['mobile']);
+ $acctype = trim($_POST['acctype']);
  
  $stmt = $reg_user->runQuery("SELECT * FROM customer WHERE customerEmail=:email_id");
  $stmt->execute(array(":email_id"=>$cemail));
@@ -36,8 +37,15 @@ if(isset($_POST['submit']))
  {
  	$account = $reg_user->getAccountNumber();
 
-  if($reg_user->apply($cname,$gen,$locat,$bcode,$cemail,$cmobile,$account))
-  {   
+  if($reg_user->apply($cname,$gen,$locat,$bcode,$cemail,$cmobile,$account,$acctype))
+  {  
+  	$accOpenDate = date('y-m-d');
+  	$stmt = $reg_user->runQuery("SELECT * FROM customer WHERE customerEmail=:email_id");
+ $stmt->execute(array(":email_id"=>$cemail));
+ $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  	$stmt = $reg_user->runQuery("INSERT INTO accounts(customerAccount,customerID,accountStatus,accOpenDate,accType)
+  		VALUES (:customerAccount,:customerID,:accountStatus,:accOpenDate,:accType)");
+  	$stmt->execute(array(":customerAccount" => $row['customerAccount'],":customerID" => $row['customerID'],":accountStatus" => $row['accountStatus'],":accOpenDate" => $accOpenDate,"accType"=>$row['accType']));
  	$account = '';
    $msg = "
      <div class='alert alert-success'>
@@ -149,8 +157,18 @@ if(isset($_POST['submit']))
 					<tr> 
 						<td><label><b>Registered mobile No</b></label></td>
 						<td>:-</td>
-						<td><input class="register" type="number" placeholder="Enter mobile no" name="mobile" required> <br><br></td>
+						<td><input class="register" type="text" placeholder="Enter mobile no" maxlength="10"  pattern="[0-9]{10}" name="mobile" required> <br><br></td>
 					</tr>
+					<tr>
+                        <td><label><b>Account Type</b></label></td>
+                        </td><td>:-</td>
+                        <td>
+                            <select name="acctype">
+                                <option value="Current">Current</option>
+                                <option value="Saving">Saving</option>  
+                            </select>
+                        </td>
+                    </tr>
     			   </table>
     			   <div class="button_register">
     			   		<button class="button1" id="register_button1" type="submit" name="submit"  ><span>Submit</span></button>

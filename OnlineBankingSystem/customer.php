@@ -1,3 +1,15 @@
+<?php
+    session_start();
+    require_once('class.user.php');
+    $reg_user = new user();
+    $customerID = $_SESSION['customerSession'];
+    $stmt = $reg_user->runQuery("SELECT * FROM customer WHERE customerID=:cid");
+    $stmt->execute(array(":cid"=>$customerID));
+    $customerRow=$stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $reg_user->runQuery("SELECT * FROM accounts WHERE customerID=:cid");
+    $stmt->execute(array(":cid"=>$customerID));
+    $accountRow=$stmt->fetch(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,8 +50,8 @@
                     <div class="collapse navbar-collapse" id="my_navbar" style="height: 0px">
                         <ul class="nav navbar-nav" id="main_nav">
                             <li><a href="customer.php" role="button">My Account</a></li>
-                            <li><a href="" role="button">Add Money</a></li>
-                            <li><a href="" role="button">Money Transfer</a></li>
+                            <li><a href="ministat.php" role="button">Mini Statement</a></li>
+                            <li><a href="moneytransfer.php" role="button">Money Transfer</a></li>
                             <li><a href="" role="button">Loan Details</a></li>
                             <li><a href="" role="button">Customize</a></li>
                             <li><a href="logout.php" role="button">Logout</a></li>
@@ -49,51 +61,31 @@
             </div>
         </div>
         <section id="content_area_section">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div>
-                        
-                    </div>
-                </div>
-            </div>
             <div class="row features_area">
-                <div class="col-sm-12 col-md-10 col-lg-10 col-lg-offset-1 col-md-offset-1 col-comn">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-lg-3 loan_area">
-                            <div class="loan_features">
-                                <span id="features_a"></span>
-                                <h3>Home Loan</h3>
-                                <p>@8.35%<sup>*</sup></p>
-                                <a href="">Apply Now <span class="apply_arrow"></span></a>
-                            </div>
-                            <span class="loan_separtor hidden-xs"></span>
-                        </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3 loan_area">
-                            <div class="loan_features">
-                                <span id="features_b"></span>
-                                <h3>Car Loan</h3>
-                                <p>@8.75%<sup>*</sup></p>
-                                <a href="">Apply Now <span class="apply_arrow"></span></a>
-                            </div>
-                            <span class="loan_separtor hidden-xs"></span>
-                        </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3 loan_area">
-                            <div class="loan_features">
-                                <span id="features_c"></span>
-                                <h3>Savings Bank </h3>
-                                <p>Online Account Opening</p>
-                                <a href="">Apply Now <span class="apply_arrow"></span></a>
-                            </div>
-                            <span class="loan_separtor hidden-xs"></span>
-                        </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3 loan_area">
-                            <div class="loan_features">
-                                <span id="features_d"></span>
-                                <h3>Personal Loan</h3>
-                                <p>SBI Loan Scheme</p>
-                                <a href="">Apply Now <span class="apply_arrow"></span></a>
-                            </div>
-                        </div>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div style="align-content: center;">
+                        <table>
+                            <tr>
+                                <td>Name</td>
+                                <td><?php echo $customerRow['customerName'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Account no.</td>
+                                <td><?php echo $customerRow['customerAccount'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Balance</td>
+                                <td><?php echo $accountRow['accountBalance'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Branch Code</td>
+                                <td><?php echo $customerRow['branchCode'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Account Type</td>
+                                <td><?php echo $customerRow['accType'] ?></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>

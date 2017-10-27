@@ -399,3 +399,21 @@ table.show_trans td,th{
 .admin_login{
 	margin: auto;
 }
+
+
+
+.transtable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.transtd {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.transtr:nth-child(even) {
+    background-color: #dddddd;
+}

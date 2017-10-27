@@ -25,12 +25,12 @@ class USER
   return $stmt;
  }
  
-    public function apply($cname,$gen,$locat,$bcode,$cemail,$mobile,$account) 
+    public function apply($cname,$gen,$locat,$bcode,$cemail,$mobile,$account,$acctype) 
     {
         try
         {
-            $stmt = $this->conn->prepare("INSERT INTO customer(customerName,gender,location,branchCode,customerEmail,mobile,customerAccount)
-                                                VALUES(:customer_name, :gender, :location, :bcode, :customer_email, :mobile,:account)");
+            $stmt = $this->conn->prepare("INSERT INTO customer(customerName,gender,location,branchCode,customerEmail,mobile,customerAccount,acctype)
+                                                VALUES(:customer_name, :gender, :location, :bcode, :customer_email, :mobile,:account,:acctype)");
 
             $stmt->bindparam(":customer_name",$cname);
             $stmt->bindparam(":gender",$gen);
@@ -39,6 +39,7 @@ class USER
             $stmt->bindparam(":customer_email",$cemail);
             $stmt->bindparam(":mobile",$mobile);
             $stmt->bindparam(":account",$account);
+            $stmt->bindparam(":acctype",$acctype);
             $stmt->execute();
             return $stmt;
         }
