@@ -18,15 +18,22 @@
             $stmt = $reg_user->runQuery("SELECT * FROM customer WHERE customerAccount=:account");
             $stmt->execute(array(":account"=>$account));
             $receiverRow=$stmt->fetch(PDO::FETCH_ASSOC);
+
+            $stmt = $reg_user->runQuery("SELECT * FROM accounts WHERE customerAccount=:account");
+            $stmt->execute(array(":account"=>$account));
+
+            $receiveraccount=$stmt->fetch(PDO::FETCH_ASSOC);
             if($stmt->rowCount() == 1) {
+                $receiveramount = $amount + $receiveraccount['accountBalance'];
                 $stmt = $reg_user->runQuery("UPDATE accounts SET accountBalance = :amount WHERE customerAccount=:account");
-                $stmt->execute(array(":amount"=>$amount,":account"=>$account));
+                $stmt->execute(array(":amount" => $receiveramount, ":account" => $account));
+                $senderamount = $accountRow['accountBalance'] - $amount;
                 $stmt = $reg_user->runQuery("UPDATE accounts SET accountBalance = :amount WHERE customerAccount=:account");
-                $stmt->execute(array(":amount"=>$amount,":account"=>$customerRow['customerAccount']));
+                $stmt->execute(array(":amount"=>$senderamount,":account"=>$customerRow['customerAccount']));
                 $date = date('y-m-d');
                 $stmt = $reg_user->runQuery("INSERT INTO transactions(paymentDate,sendId,receiveId,amount,paymentStat) 
                     VALUES(:paymentDate,:sendId,:receiveId,:amount,:stat)");
-                $stmt->execute(array(":paymentDate"=>$date,":amount"=>$amount,":sendId"=>$customerRow['customerID'],":receiveId"=>$receiverRow['customerID'],":stat"=>SUCCESS));
+                $stmt->execute(array(":paymentDate"=>$date,":amount"=>$amount,":sendId"=>$customerRow['customerID'],":receiveId"=>$receiverRow['customerID'],":stat"=>'SUCCESS'));
                  $msg = "
                     <div class='alert alert-success'>
                         <button class='close' data-dismiss='alert'>&times;</button>
@@ -105,7 +112,11 @@
             <div class="row features_area">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <div style="align-content: center;">
+                        <?php if(isset($msg)) echo $msg;  ?>
+
                         <h1>Transfer Money</h1>
+                        <form  name = "myForm" class="register_form" action="" method="post">
+
                         <table>
                             <tr>
                                 <td>Account no</td>
@@ -117,12 +128,15 @@
                             </tr>
                             <tr>
                                 <td>Transaction Password</td>
-                                <td><input class="register" type="password" placeholder="Enter transaction password" name="transpass" required> <br><br></td>
+                                <td><input class="register" type="password" placeholder="Enter transaction password" name="transpass"> <br><br></td>
                             </tr>
                         </table>
                         <div class="button_register">
                             <button class="button1" id="register_button3" type="submit" name="submit"  ><span>Transfer</span></button>
-                            <button class="button1" id="register_button4" type="reset"><span>Reset</span></button>     
+                            <button class="button1" id="register_button4" type="reset"><span>Reset</span></button>
+                        </div>
+                       </form> 
+
                     </div>
                     </div>
                 </div>

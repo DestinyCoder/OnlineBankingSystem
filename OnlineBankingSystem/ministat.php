@@ -3,9 +3,9 @@
 	require_once('class.user.php');
     $reg_user = new user();
     $customerID = $_SESSION['customerSession'];
-    $stmt = $reg_user->runQuery("SELECT * FROM transactions WHERE sendId=:sid");
-    $stmt->execute(array(":sid"=>$customerID));
-    $customerRow=$stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $reg_user->runQuery("SELECT * FROM transactions WHERE sendId=:sid or receiveId = :rid");
+    $stmt->execute(array(":sid"=>$customerID,":rid" => $customerID));
+    $customerRow=$stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,8 +47,8 @@
                     <div class="collapse navbar-collapse" id="my_navbar" style="height: 0px">
                         <ul class="nav navbar-nav" id="main_nav">
                             <li><a href="customer.php" role="button">My Account</a></li>
-                            <li><a href="" role="button">Mini Statement</a></li>
-                            <li><a href="" role="button">Money Transfer</a></li>
+                            <li><a href="ministat.php" role="button">Mini Statement</a></li>
+                            <li><a href="moneytransfer.php" role="button">Money Transfer</a></li>
                             <li><a href="" role="button">Loan Details</a></li>
                             <li><a href="" role="button">Customize</a></li>
                             <li><a href="logout.php" role="button">Logout</a></li>
@@ -62,25 +62,23 @@
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <h1>Mini Statement</h1>
                     <div>
-                        <table>
-                        	<tr></tr>
-                        		<thead>Transaction Id</thead>
-                        		<thead>Payment Date</thead>
-                        		<thead>Receiver Id</thead>
-                        		<thead>Amount</thead>
-                        		<thead>Status</thead>
+                        <table class="transtable">
+                        	<tr class="transtr">
+                        		<td class='transtd'>Transaction Id</td>
+                        		<td class='transtd'>Payment Date</td>
+                        		<td class='transtd'>Receiver Id</td>
+                        		<td class='transtd'>Amount</td>
+                        		<td class='transtd'>Status</td>
                         	</tr>
                         	<?php 
-                        		echo "<table class='transtable'>";
-                        			foreach ((array)$customerRow as $row) {
+                        			foreach ($customerRow as $row) {
      									echo "<tr class='transtr'>";
-     									echo "<td class='transtd'>".$row['transId']."</td>";
+     									echo "<td class='transtd'>".$row["transId"]."</td>";
      									echo "<td class='transtd'>".$row['paymentDate']."</td>";
-     									echo "<td class='transtd'>".$row['receiveID']."</td>";
+     									echo "<td class='transtd'>".$row['receiveId']."</td>";
      									echo "<td class='transtd'>".$row['amount']."</td>";
      									echo "<td class='transtd'>".$row['paymentStat']."</td>";
-     									echo "</tr>";
-     								}
+       								}
     							echo "</table>";
 							?>
                         </table>
