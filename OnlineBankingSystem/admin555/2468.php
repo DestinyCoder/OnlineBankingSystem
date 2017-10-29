@@ -6,7 +6,7 @@ $adminClass = new adminClass();
  
 $errorMsgLogin='';
 /* Login Form */
-if (!empty($_POST['loginSubmit'])) 
+if (isset($_POST['submit'])) 
 {
 $adminname=$_POST['adminname'];
 $adminpass=$_POST['adminpass'];
@@ -15,7 +15,7 @@ if(strlen(trim($adminname))>1 && strlen(trim($adminpass))>1 )
 $adminid=$adminClass->adminLogin($adminname,$adminpass);
 if($adminid)
 {
-$url=BASE_URL().'adminhome.php';
+$url='adminhome.php';
 header("Location: $url"); // Page redirecting to home.php 
 }
 else

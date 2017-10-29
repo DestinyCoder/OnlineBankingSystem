@@ -12,38 +12,21 @@ if($reg_user->is_logged_in()=="")
 
 if(isset($_POST['submit']))
 {
-
- $cpass = trim($_POST['cpass']);
- $npass = trim($_POST['npass']);
- $cpass = md5($cpass);
- $stmt = $reg_user->runQuery("SELECT * FROM customer WHERE customerID=:cid");
- $stmt->execute(array(":cid"=>$customerID));
- $row = $stmt->fetch(PDO::FETCH_ASSOC);
- 
- if($row['customerPass'] != $cpass)
- {
-  $msg = "
-        <div class='alert alert-error'>
-    <button class='close' data-dismiss='alert'>&times;</button>
-     <strong>Sorry !</strong>  You Entered Wrong password , Please Try again
-     </div>
-     ";
- }
- else
- {
-  	$npass = md5($npass);
-  	$stmt = $reg_user->runQuery("UPDATE customer SET customerPass = :npass WHERE customerID=:cid");
- $stmt->execute(array(":npass"=>$npass,":cid"=>$customerID));
-   $msg = "
+ $loantype = trim($_POST['loantype']);
+ $loanamt = trim($_POST['loanamt']);
+ $irate = trim($_POST['irate']);
+ $date = date('Y-m-d');
+ $stmt = $reg_user->runQuery("INSERT INTO loan(loanType,loanAmt,interestRate,customerID,startDate)   
+ 									VALUES(:loantype,:loanamt,:irate,:cid,:sdate)");
+ $stmt->execute(array(":loantype"=>$loantype,":loanamt"=>$loanamt,":irate"=>$irate,":cid"=>$customerID,":sdate"=>$date));
+    $msg = "
      <div class='alert alert-success'>
       <button class='close' data-dismiss='alert'>&times;</button>
-      <strong>Success!</strong>  Your Password is Changed Successfully.
-                   
+      <strong>Success!</strong>  Your Application is successfull.
+                    Please visit your nearest branch to confirm your loan. 
        </div>
      ";
   }
-  
- }
 
 ?>
 
@@ -101,27 +84,46 @@ if(isset($_POST['submit']))
  		<div class="features_area row">	
 			<div class="row_register">
 				<?php if(isset($msg)) echo $msg;  ?>
-				<h1><center>Change Password</center></h1>
-				<form  name = "myForm" class="register_form" action="" method="post">
-				<table> 
-					<tr>
-						<td><label><b>Current Password</b></label>
-						</td><td>:-</td>
-						<td><input class="register" type="text" placeholder="Enter Your Name Here" name="cpass" required> <br><br></td>
-					</tr>
 			
-                    
+				
+					<h1><center>Apply For Loan</center></h1>
+					<form  name = "myForm" class="register_form" action="" method="post">
+						<table> 
+					
+					<tr>
+                        <td><label><b>Type of Loan</b></label></td>
+                        </td><td>:-</td>
+                        <td>
+                            <select name="loantype">
+                                <option value="CAR">CAR</option>
+                                <option value="HOME">HOME</option>
+                                <option value="SAVING">SAVING</option> 
+                                <option value="PERSONAL">PERSONAL</option>  
+                            </select>
+                        </td>
+                    </tr>
 					<tr> 
-						<td><label><b>New Password</b></label></td>
+						<td><label><b>Loan Amount</b></label></td>
 						<td>:-</td>
-						<td><input class="register" type="password" placeholder="Enter new password" name="npass" required></center><br><br></td>
+						<td><input class="register" type="number" placeholder="Enter Loan Amount" name="loanamt" required></center><br><br></td>
+					</tr>
+					<tr>
+						<td> <label><b>Email</b></label></td>
+						<td>:-</td>
+						<td><input class="register" type="Email" placeholder="Enter Email" name="email" required> <br><br></td>
+					</tr>
+					<tr> 
+						<td><label><b>Interest Rate</b></label></td>
+						<td>:-</td>
+						<td><input class="register" type="number" placeholder="" maxlength="10" name="irate" value=10 fixed  required> <br><br></td>
 					</tr>
     			   </table>
     			   <div class="button_register">
     			   		<button class="button1" id="register_button1" type="submit" name="submit"  ><span>Submit</span></button>
       					<button class="button1" id="register_button2" type="reset"><span>Reset</span></button>     
 					</div>
-				</form> 
+					</form> 
+	
 			</div>	 
 		</div>
 			 
@@ -130,4 +132,3 @@ if(isset($_POST['submit']))
 	<script type="text/javascript" src=""></script>
 </body>
 </html>                                                       
-

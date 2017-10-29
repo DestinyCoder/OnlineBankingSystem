@@ -34,6 +34,9 @@
                 $stmt = $reg_user->runQuery("INSERT INTO transactions(paymentDate,sendId,receiveId,amount,paymentStat) 
                     VALUES(:paymentDate,:sendId,:receiveId,:amount,:stat)");
                 $stmt->execute(array(":paymentDate"=>$date,":amount"=>$amount,":sendId"=>$customerRow['customerID'],":receiveId"=>$receiverRow['customerID'],":stat"=>'SUCCESS'));
+    $stmt = $reg_user->runQuery("SELECT * FROM accounts WHERE customerID=:cid");
+    $stmt->execute(array(":cid"=>$customerID));
+    $accountRow=$stmt->fetch(PDO::FETCH_ASSOC);
                  $msg = "
                     <div class='alert alert-success'>
                         <button class='close' data-dismiss='alert'>&times;</button>
@@ -98,10 +101,10 @@
                     <div class="collapse navbar-collapse" id="my_navbar" style="height: 0px">
                         <ul class="nav navbar-nav" id="main_nav">
                             <li><a href="customer.php" role="button">My Account</a></li>
-                            <li><a href="" role="button">Add Money</a></li>
-                            <li><a href="" role="button">Money Transfer</a></li>
-                            <li><a href="" role="button">Loan Details</a></li>
-                            <li><a href="" role="button">Customize</a></li>
+                            <li><a href="ministat.php" role="button">Mini Statement</a></li>
+                            <li><a href="moneytransfer.php" role="button">Money Transfer</a></li>
+                            <li><a href="loan.php" role="button">Loan Details</a></li>
+                            <li><a href="customize.php" role="button">Customize</a></li>
                             <li><a href="logout.php" role="button">Logout</a></li>
                         </ul>
                     </div>

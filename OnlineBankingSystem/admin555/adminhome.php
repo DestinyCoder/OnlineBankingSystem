@@ -44,7 +44,7 @@
 
             <ul class="nav">
                 <li class="active">
-                    <a href="dashboardphp"> 
+                    <a href="dashboard.php"> 
                         <p>Dashboard</p>
                     </a>
                 </li>

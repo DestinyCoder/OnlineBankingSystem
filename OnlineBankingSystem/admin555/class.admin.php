@@ -18,34 +18,27 @@ class adminClass
 	  return $stmt;
 	}   
 	public function adminLogin($usernameEmail,$password){
-		try{
+		
 
- 		 $database = new Database();
-		 $db = $database->dbConnection();
+ 		 
 		//$hash_password= hash('sha256', $adminpass); //Password encryption 
-		  $hash_password= $adminpass;
-		$stmt = $db->prepare("SELECT adminid FROM admin WHERE (add_user=:adminname) AND add_user =:hash_password"); 
-		$stmt->bindParam("usernameEmail", $usernameEmail,PDO::PARAM_STR) ;
-		$stmt->bindParam("hash_password", $hash_password,PDO::PARAM_STR) ;
+		  $hash_password= $password;
+		$stmt = $this->conn->prepare("SELECT * FROM admin WHERE add_user=:adminname"); 
+		$stmt->bindParam(":adminname", $usernameEmail,PDO::PARAM_STR) ;
+		
 		$stmt->execute();
-		$count=$stmt->rowCount();
-		$data=$stmt->fetch(PDO::FETCH_OBJ);
-		$db = null;
-		if($count)
-		{
-		$_SESSION['adminid']=$data->adminid; // Storing user session value
-		return true;
-		}
-		else
-		{
-		return false;
-		} 
-	}
-	catch(PDOException $ex)
-        {
-            echo $ex->getMessage();
-        }
-
+		   $adminRow=$stmt->fetch(PDO::FETCH_ASSOC);
+   
+   if($stmt->rowCount() == 1)
+   {
+   
+     if($adminRow['add_pass']==$hash_password)
+     {
+      $_SESSION['adminid'] = $adminRow['adminid'];
+      return true;
+     }
+	
+}
 }
 	public function addemp($ename,$egen,$eadd,$esalary,$eemail,$emobile,$edob)
     {
