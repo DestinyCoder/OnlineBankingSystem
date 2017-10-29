@@ -417,3 +417,14 @@ table.show_trans td,th{
 .transtr:nth-child(even) {
     background-color: #dddddd;
 }
+.admin_login{
+	margin: auto;
+}
+.branch{
+padding: 50px;
+margin: 10px;
+float: left;
+text-align: left;
+background-color: #FDE8D7;
+}
+ 

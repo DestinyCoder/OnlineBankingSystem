@@ -15,7 +15,7 @@ if(strlen(trim($adminname))>1 && strlen(trim($adminpass))>1 )
 $adminid=$adminClass->adminLogin($adminname,$adminpass);
 if($adminid)
 {
-$url=BASE_URL.'adminhome.php';
+$url=BASE_URL().'adminhome.php';
 header("Location: $url"); // Page redirecting to home.php 
 }
 else

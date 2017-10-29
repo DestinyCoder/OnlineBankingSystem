@@ -1,0 +1,27 @@
+.title{
+  font-size: 200px;
+}
+.icondash{
+  height: 40px;
+  width: 40px;
+  border: 1px; 
+  display: block;
+    margin: auto;
+  }
+   .font-icon-detail{
+     text-align: center;
+     border:1px solid black;
+      padding: 10px;
+     margin-top: 50px;
+     height: 100px;
+     width: 150px; 
+     
+ }
+ .validatecust td,th{
+  text-align: left;
+  padding: 15px;
+  font-size: 30px;
+  font-family: "Times New Roman";
+  border-top: 1px solid #ddd;
+  
+}

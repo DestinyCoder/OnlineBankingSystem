@@ -1,8 +1,10 @@
 <?php
  include '../dbconnect.php';
  include 'getdetails.php';
+ $database = new Database();
+$db = $database->dbConnection(); 
  // getting all transaction details of the account 
- $trans_result = $conn->prepare("SELECT * FROM transaction WHERE sender = '".$row_cust["account_no"]."'  														 										 OR receiver = '".$row_cust["account_no"]."'" );
+ $trans_result = $db->prepare("SELECT * FROM transaction WHERE sender = '".$row_cust["account_no"]."'  														 										 OR receiver = '".$row_cust["account_no"]."'" );
  $trans_result->execute();
  $row_trans = $trans_result->fetchall();//setFetchMode(PDO::FETCH_ASSOC);
  /*

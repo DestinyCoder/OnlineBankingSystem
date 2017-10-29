@@ -1,0 +1,87 @@
+.title{
+  font-size: 30px;
+}
+ table.validatecust td,th{
+  text-align: left;
+  padding: 15px;
+  font-size: 20px;
+  font-family: "Times New Roman";
+  border-top: 1px solid #ddd;
+  
+}
+.button1 {
+	width: 150px;
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  margin: 10px;
+  align-self: center;
+}
+
+.button1:hover {background-color: #3e8e41}
+
+.button1:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+label{
+	font-size: 30px;
+	align-self: center;
+}
+input[type=number],input[type=Email],input[type=text],input[type=date],  select {
+	width: 200px;
+	padding: 12px 20px;
+	margin: 8px 50px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-sizing:  border-box;
+} 
+input[type=radio], select{
+	font-size: 30px;
+	size: 20px;
+	margin: 20px;
+}
+select{
+   -webkit-appearance: button;
+   -webkit-border-radius: 2px;
+   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+   -webkit-padding-end: 20px;
+   -webkit-padding-start: 2px;
+   -webkit-user-select: none;
+   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+   background-position: 97% center;
+   background-repeat: no-repeat;
+   border: 1px solid #AAA;
+   color: #555;
+   font-size: inherit;
+   margin: 20px;
+   overflow: hidden;
+   padding: 5px 10px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 300px;
+}
+ .selectid ,  select {
+	width: 300px;
+	padding: 12px 20px;
+	margin: 8px 50px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-sizing:  border-box;
+} 
+.span1{
+	font-size: 20px;
+	margin-left: 10px;
+}
