@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2017 at 05:20 PM
+-- Generation Time: Oct 29, 2017 at 05:46 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -21,8 +21,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `bank`
 --
-CREATE DATABASE IF NOT EXISTS `bank` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `bank`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accdetail`
+--
+
+CREATE TABLE IF NOT EXISTS `accdetail` (
+  `accType` enum('Current','Saving') NOT NULL,
+  `minBalance` int(11) NOT NULL,
+  `interestRate` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `accdetail`
+--
+
+INSERT INTO `accdetail` (`accType`, `minBalance`, `interestRate`) VALUES
+('Current', 6000, 15),
+('Saving', 4000, 10);
 
 -- --------------------------------------------------------
 
@@ -30,12 +48,13 @@ USE `bank`;
 -- Table structure for table `account`
 --
 
-DROP TABLE IF EXISTS `account`;
-CREATE TABLE `account` (
+CREATE TABLE IF NOT EXISTS `account` (
   `customerAccount` int(11) NOT NULL,
   `balance` int(11) NOT NULL,
   `loan_status` varchar(11) NOT NULL,
-  `date_create` date NOT NULL
+  `date_create` date NOT NULL,
+  PRIMARY KEY (`customerAccount`),
+  UNIQUE KEY `loan_no` (`loan_status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -49,15 +68,38 @@ INSERT INTO `account` (`customerAccount`, `balance`, `loan_status`, `date_create
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `accounts`
+--
+
+CREATE TABLE IF NOT EXISTS `accounts` (
+  `customerAccount` int(11) NOT NULL,
+  `customerID` int(11) NOT NULL,
+  `accountStatus` enum('Inactive','Active') NOT NULL,
+  `accOpenDate` date NOT NULL,
+  `accType` enum('Current','Saving') NOT NULL,
+  `accountBalance` int(11) NOT NULL DEFAULT '5000'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`customerAccount`, `customerID`, `accountStatus`, `accOpenDate`, `accType`, `accountBalance`) VALUES
+(15705, 2, '', '2017-10-26', 'Saving', 5000),
+(79927, 1, '', '2017-10-26', 'Current', 5000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE `admin` (
-  `adminid` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `admin` (
+  `adminid` int(11) NOT NULL AUTO_INCREMENT,
   `add_user` varchar(100) NOT NULL,
-  `add_pass` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `add_pass` varchar(100) NOT NULL,
+  PRIMARY KEY (`adminid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
@@ -72,8 +114,7 @@ INSERT INTO `admin` (`adminid`, `add_user`, `add_pass`) VALUES
 -- Table structure for table `branch`
 --
 
-DROP TABLE IF EXISTS `branch`;
-CREATE TABLE `branch` (
+CREATE TABLE IF NOT EXISTS `branch` (
   `branchCode` enum('GEN123','DEL456','MUM789') NOT NULL DEFAULT 'GEN123',
   `branch_city` varchar(100) NOT NULL,
   `branch_phone` int(11) NOT NULL,
@@ -93,8 +134,7 @@ INSERT INTO `branch` (`branchCode`, `branch_city`, `branch_phone`, `branch_addre
 -- Table structure for table `customer`
 --
 
-DROP TABLE IF EXISTS `customer`;
-CREATE TABLE `customer` (
+CREATE TABLE IF NOT EXISTS `customer` (
   `customerID` int(11) NOT NULL,
   `customerAccount` int(16) NOT NULL,
   `gender` enum('Male','Female') NOT NULL,
@@ -123,11 +163,35 @@ INSERT INTO `customer` (`customerID`, `customerAccount`, `gender`, `location`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `employee`
+--
+
+CREATE TABLE IF NOT EXISTS `employee` (
+  `empid` int(11) NOT NULL AUTO_INCREMENT,
+  `empname` varchar(255) NOT NULL,
+  `empgender` varchar(1) NOT NULL,
+  `empadd` varchar(255) NOT NULL,
+  `empsalary` int(11) NOT NULL,
+  `empemail` varchar(255) NOT NULL,
+  `empmobile` bigint(20) NOT NULL,
+  `empdob` date NOT NULL,
+  PRIMARY KEY (`empid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`empid`, `empname`, `empgender`, `empadd`, `empsalary`, `empemail`, `empmobile`, `empdob`) VALUES
+(2, 'Pawan', 'M', 'Nerul', 50000, 'gamers@1107', 7656545412, '2017-10-04');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `loan`
 --
 
-DROP TABLE IF EXISTS `loan`;
-CREATE TABLE `loan` (
+CREATE TABLE IF NOT EXISTS `loan` (
   `loan_id` int(11) NOT NULL,
   `loan_name` varchar(100) NOT NULL,
   `loan_interest` int(11) NOT NULL,
@@ -140,8 +204,7 @@ CREATE TABLE `loan` (
 -- Table structure for table `loan_info`
 --
 
-DROP TABLE IF EXISTS `loan_info`;
-CREATE TABLE `loan_info` (
+CREATE TABLE IF NOT EXISTS `loan_info` (
   `loan_no` int(11) NOT NULL,
   `account_no` int(11) NOT NULL,
   `loan_id` int(11) NOT NULL,
@@ -157,8 +220,7 @@ CREATE TABLE `loan_info` (
 -- Table structure for table `transaction`
 --
 
-DROP TABLE IF EXISTS `transaction`;
-CREATE TABLE `transaction` (
+CREATE TABLE IF NOT EXISTS `transaction` (
   `trans_id` int(11) NOT NULL,
   `sender` int(11) NOT NULL,
   `receiver` int(11) NOT NULL,
@@ -173,33 +235,7 @@ CREATE TABLE `transaction` (
 INSERT INTO `transaction` (`trans_id`, `sender`, `receiver`, `trans_amount`, `trans_date`) VALUES
 (1, 123, 321, 500, '2017-09-01'),
 (2, 321, 123, 100, '2017-09-04');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `account`
---
-ALTER TABLE `account`
-  ADD PRIMARY KEY (`customerAccount`),
-  ADD UNIQUE KEY `loan_no` (`loan_status`);
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`adminid`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `adminid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
