@@ -1,5 +1,5 @@
 <?php
-  include('adminsession.php');
+  //include('adminsession.php');
 include('class.admin.php');
 require_once '../dbconnect.php';
 $adminClass = new adminClass();

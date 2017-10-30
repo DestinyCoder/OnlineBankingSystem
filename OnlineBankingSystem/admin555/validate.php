@@ -1,5 +1,5 @@
 <?php
- include('adminsession.php');
+ //include('adminsession.php');
 ?>
 <!doctype html>
 <html lang="en">

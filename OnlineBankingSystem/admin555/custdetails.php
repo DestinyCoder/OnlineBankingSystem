@@ -1,5 +1,5 @@
 <?php
- include('adminsession.php'); 
+ //include('adminsession.php'); 
 require_once '../dbconnect.php'; 
 $database = new Database();
 $db = $database->dbConnection();

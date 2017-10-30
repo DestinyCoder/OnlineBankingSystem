@@ -1,5 +1,5 @@
 <?php
- include('adminsession.php');
+ //include('adminsession.php');
 require_once 'class.admin.php';
 $admin = new adminClass();
 if(isset($_POST['submit']))

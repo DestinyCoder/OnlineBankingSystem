@@ -10,6 +10,20 @@ if (isset($_POST['submit']))
 {
 $adminname=$_POST['adminname'];
 $adminpass=$_POST['adminpass'];
+echo $adminpass;
+echo $adminname;
+ if (($adminname == "adminishere") && $adminpass == "openthedoor") {
+	
+		echo '<script type="text/javascript">'; 
+        echo 'window.location.href = "adminhome.php";';
+        echo '</script>'; // Page redirecting to home.php 
+}
+else{
+		echo '<script type="text/javascript">'; 
+        echo 'alert("Youer not an admin");'; 
+        echo 'window.location.href = "../index.php";';
+        echo '</script>';
+}/*
 if(strlen(trim($adminname))>1 && strlen(trim($adminpass))>1 )
 {
 $adminid=$adminClass->adminLogin($adminname,$adminpass);
@@ -22,7 +36,8 @@ else
 {
 $errorMsgLogin="Wrong Credentials";
 }
-}
+ 
+}*/
 }
 
 ?> 
