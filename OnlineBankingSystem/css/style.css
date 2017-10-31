@@ -420,11 +420,24 @@ table.show_trans td,th{
 .admin_login{
 	margin: auto;
 }
-.branch{
+#branch{
 padding: 50px;
 margin: 10px;
 float: left;
+font-size: 20px;
 text-align: left;
-background-color: #FDE8D7;
+background-color: #C1D3F7;
+border-top-right-radius: 10px;
+border-radius: 10px;
+width: 300px;
 }
- 
+ .question{
+ 	font-size: 30px;
+ 	font-family: Times New Roman;
+ 	 
+ }
+ .answer{
+ 	font-size: 20px;
+ 	font-family: Times New Roman;
+ 	
+ }

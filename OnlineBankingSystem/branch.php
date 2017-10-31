@@ -49,26 +49,34 @@
 				</nav>
 			</div>
 		</div>
- 		<div class="features_area row" id="middle_box" style="padding: 0;">	
+ 		<div class="features_area row" id="middle_box" style="padding: 0;	">	
 				
 			<section id="content_area_section">
 			<div class="row features_area">
 				<div class="col-sm-12 col-md-10 col-lg-10 col-lg-offset-1 col-md-offset-1 col-comn">
 					<div class="row">
 						<div class="col-sm-3 col-md-3 col-lg-3 loan_area">
-							<div class="branch">
+							<div id="branch" >
 								<h7><b><p>World Bank<br><br></b></h7>
-								Gunivea
-								Near Rail Road
-								502 
+								GENEVA<br>
+								Near Rail Road<br>
+								502 <br>
 							</div>
-							<div class="branch">
+							<div id="branch">
 								<h7><b><p>World Bank<br><br></b></h7>
-								Mumbai
-								502,linkin road
-								Bandra
-								452-015
+								Mumbai<br>
+								502,linkin road<br>
+								Bandra<br>
+								452-015<br>
 							</div>
+
+							<div id="branch">
+								<h7><b><p>World Bank <br><br></b></h7>
+								Delhi<br>
+								454,<br>
+								Connaught Place <br>
+								110-001<br>
+							</div>	
 					</div>
 				</div>
 			</div>

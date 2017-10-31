@@ -54,16 +54,16 @@
 			<div class="row_register">
 			
 				<h1><center>Help</center></h1>
-				<h2>1. What is world bank</h2>
-				<p>world bank is the Internet banking service provided by world bank, India's largest and premier commercial bank</p>
-				<h2>2. What is special about Internet banking?</h2>
-				<p>Internet banking is the most convenient way to bank- anytime, any place, at your convenience.</p>
-				<h2>3. I do not have a PC?</h2>
-				<p>You can access world bank from any computer that has connectivity to the Internet. But make sure your computer is Malware free. For more details please Click here.</p>
-				<h2>4. How do I access world bank?</h2>
-				<p>You need to have an account at a branch. You also need to register for the Internet banking service with the branch. Branch will provide you a Pre Printed Kit (PPK) containing username and password for first login. If you are not in a position to collect PPK in person, the bank will arrange to send a username through SMS and a mailer containing password to your registered address. Logon to www.onlinesbi.com using this username and password. At the first login, you will need to go through a simple initialization process. Our Net banking assistant will guide you step by step through this process on the site.</p>
-				<h2>5. I do not have an account with World Bank?</h2>
-				<p>You are welcome to open it now. It is very easy to open an account with world bank. You can apply online for opening of a savings bank account. A link 'Online WB Account Application' is available on the home page of www.worldbank.com or just walk in to any of our branches nearby. Our staff would be pleased to assist you.</p>
+				<h2 class="question">1. What is world bank</h2>
+				<p class="answer"><b>Ans</b> - world bank is the Internet banking service provided by world bank, India's largest and premier commercial bank</p>
+				<h2 class="question">2. What is special about Internet banking?</h2>
+				<p class="answer"><b>Ans</b>  - Internet banking is the most convenient way to bank- anytime, any place, at your convenience.</p>
+				<h2 class="question">3. I do not have a PC?</h2>
+				<p class="answer"><b>Ans</b>  - You can access world bank from any computer that has connectivity to the Internet. But make sure your computer is Malware free. For more details please Click here.</p>
+				<h2 class="question">4. How do I access world bank?</h2>
+				<p class="answer"><b>Ans</b>  - You need to have an account at a branch. You also need to register for the Internet banking service with the branch. Branch will provide you a Pre Printed Kit (PPK) containing username and password for first login. If you are not in a position to collect PPK in person, the bank will arrange to send a username through SMS and a mailer containing password to your registered address. Logon to www.onlinesbi.com using this username and password. At the first login, you will need to go through a simple initialization process. Our Net banking assistant will guide you step by step through this process on the site.</p>
+				<h2 class="question">5. I do not have an account with World Bank?</h2>
+				<p class="answer"><b>Ans</b>  - You are welcome to open it now. It is very easy to open an account with world bank. You can apply online for opening of a savings bank account. A link 'Online WB Account Application' is available on the home page of www.worldbank.com or just walk in to any of our branches nearby. Our staff would be pleased to assist you.</p>
 			</div>	 
 		</div>
 			 
